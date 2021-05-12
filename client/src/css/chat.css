@@ -1,0 +1,18 @@
+.chat-box {
+  width: 95vw;
+  height: 35vh;
+  background: url('../img/utils/message-box.png') no-repeat center center/contain;
+  position: absolute;
+  bottom: 2vh;
+  left: 2.5vw;
+  text-align: center;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+
+
+.chat-box>p {
+
+  margin: 2rem;
+}

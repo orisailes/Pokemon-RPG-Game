@@ -1,0 +1,5 @@
+.player {
+    position: absolute;
+    transition: top 0.3s,left 0.3s;
+    /* transition: top 0.3s; */
+}

@@ -1,0 +1,105 @@
+
+.landing-page {
+    height: 100vh;
+    width: 100vw;
+    background: url('../img/home/goldPokemonBackground.jpg') no-repeat center center;
+    background-size: cover;
+
+}
+
+
+.login-popup-container {
+    width: 100vw;
+    height: 100vh;
+    background: url('../img/home/goldPokemonGif.gif') no-repeat center center;
+    background-size: contain;
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-popup {
+    height: 60vh;
+    width: 40vw;
+    background: #F8F8F8;
+    border: 2px solid #78A0F8;
+    opacity: 0.9;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-popup form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+}
+
+.login-popup form input {
+    margin: 0.45rem;
+}
+
+.login-popup img {
+    height: 10vh;
+}
+
+.login-popup button {
+    margin: 0;
+}
+
+.login-popup p {
+    text-align: center;
+    margin: 0;
+    color: rgba(243, 79, 79);
+}
+
+.pokemons-desplayer {
+    height: 80vh;
+    width: 80vw;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow: hidden;
+    position: relative;
+}
+
+.pokemons-desplayer .pokemons-desplayer-pokeball {
+    width: 9vw;
+    height: 15vh;
+}
+
+.pokemons-desplayer .heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.pokemons-desplayer .content {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+}
+
+.pokemons-desplayer .pokemon-gif img {
+    height: 12vh;
+}
+
+.pokemons-desplayer .content .pokemon-gif {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin: 0.5rem;
+    text-align: center;
+    line-height: 1.5rem;
+    cursor: pointer;
+    
+}

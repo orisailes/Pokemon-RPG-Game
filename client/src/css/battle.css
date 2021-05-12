@@ -1,0 +1,394 @@
+.battle-page {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: -100;
+    top: 0;
+    left: 0;
+    background: url('../img/utils/battleZone.png') no-repeat center center/cover;
+    background-size: 100vw 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.first-hider-battle-page {
+    opacity: 1;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 1235100;
+    top: 0;
+    left: 0;
+    /* background: url('../img/utils/battleZone.png') no-repeat center center/cover; */
+    background-color: black;
+    animation: revealGame 3s forwards linear;
+    animation-delay:1s ;
+}
+
+.battle-page-volume-btn {
+    position: absolute;
+    top: 5px;
+    left: 49%;
+}
+
+.pokemon-choose-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 80%;
+    cursor: pointer;
+    width: 12%;
+    line-height: 1rem;
+}
+
+.pokemon-choose-div button {
+    font-size: smaller;
+}
+
+.pokemon-choose-div>button>i {
+    transition: transform 0.3s;
+}
+
+
+.pokemon-choose-div:hover>button>i {
+
+    transform: rotate(1turn) scale(1.4);
+}
+
+.pokemon-choose-div>button:hover {
+    font-weight: normal !important;
+}
+
+
+.pokemon-choose-div button {
+    margin: 0 !important;
+}
+
+.pokemons-container {
+    height: 72vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.pokemon {
+    width: 100vw;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pokemon img {
+    height: 30vh;
+}
+
+.user-pokemon img {
+    align-self: flex-end;
+}
+
+.enemy-pokemon img {
+    align-self: flex-end;
+    height: 40vh;
+}
+
+.enemy-pokemon-img {
+    transform: translateX(35vw);
+    animation: revelEnemyPokemon 1s forwards;
+    animation-delay: 4.5s;
+}
+
+.user-pokemon-img {
+    animation: revelUserPokemon 1s forwards;
+}
+
+.enemy-pokemon {
+    flex-direction: row-reverse;
+}
+
+.message-box-container {
+    height: 28vh;
+    width: 100vw;
+}
+
+.message-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 23vh;
+    width: 94vw;
+    margin: 1.3rem auto;
+    overflow: hidden;
+}
+
+.message {
+    width: 65%;
+    height: 100%;
+
+}
+
+.first-btn {
+    animation: float 3s infinite linear;
+}
+
+.battle-btn-container {
+    width: 35%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.pokemon-switch-btn {
+    grid-column: span 2;
+}
+
+.battle-btn-container .btn {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.hider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 123;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.user-pokemons-container {
+    position: absolute;
+    height: 60vh;
+    width: 70vw;
+    border: 4px solid white;
+    color: white;
+    background: rgba(0, 0, 0, 0.753);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.user-pokemons-container .user-individual-pokemon {
+    text-align: center;
+    cursor: pointer;
+    width: 12%;
+}
+
+.user-pokemons-container .user-individual-pokemon img {
+    height: 12vh;
+}
+
+.user-attacks {
+    animation: userAttack 0.25s backwards ease-in-out;
+}
+
+.enemy-attacks {
+    animation: enemyAttack 0.25s backwards ease-in-out;
+}
+
+.get-hurt {
+    animation: getHurt 0.5s backwards ease-in-out;
+}
+
+.user-pokemon-die {
+    animation: userPokemonDie 0.3s forwards linear;
+}
+
+.enemy-pokemon-die {
+    animation: enemyPokemonDie 0.35s forwards linear;
+}
+
+.hider .end-game-individual-pokemon {
+    width: 12vw;
+    height: 90%;
+    color: whitesmoke;
+    font-weight: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.hider .end-game-individual-pokemon img {
+    height: 35vh;
+}
+
+.hider .end-game-individual-pokemon .exp-bar {
+    width: 90%;
+}
+
+.new-level-recived-span {
+    font-size: small;
+}
+
+.new-level-recived {
+    transition: all 0.6s;
+    transform: scale(1.2);
+    color: #3E7AEB;
+
+}
+
+.user-money {
+    transform: scale(1.25);
+    color: #57cd4c;
+    margin-top: 3rem;
+}
+
+.user-money-span {
+    transition: all 0.6s;
+    font-size: larger;
+    color: #71d068;
+    margin-top: 3rem;
+}
+
+.end-game-pokemons-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow: hidden;
+    width: 100vw;
+}
+
+
+@keyframes revealGame {
+    to{
+        opacity: 0;
+    }
+}
+
+@keyframes userPokemonDie {
+    to {
+        transform: translateY(30vh);
+    }
+}
+
+@keyframes enemyPokemonDie {
+    to {
+        transform: translateX(20vw);
+    }
+}
+
+@keyframes getHurt {
+    10% {
+        opacity: 0.2;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    30% {
+        opacity: 0.2;
+    }
+
+    40% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.2;
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 0.2;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 0.2;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes userAttack {
+    50% {
+        transform: translate(10rem, -2.5rem);
+    }
+
+}
+
+@keyframes enemyAttack {
+    50% {
+        transform: translate(-10rem, 2.5rem);
+    }
+}
+
+@keyframes revelEnemyStats {
+    from {
+        transform: translateX(-35vw);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes revelUserStats {
+    from {
+        transform: translateX(35vw);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes revelUserPokemon {
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes revelEnemyPokemon {
+    from {
+        transform: translateX(35vw);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0vh);
+    }
+
+    25% {
+        transform: translateY(0.5vh);
+
+    }
+
+    75% {
+        transform: translateY(-0.5vh);
+
+    }
+
+    100% {
+        transform: translateY(0vh);
+
+    }
+}

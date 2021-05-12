@@ -1,0 +1,72 @@
+html{
+    background-color:whitesmoke ;
+}
+
+.trail {
+    background: url('../img/map/trail.png') no-repeat center center/cover;
+}
+
+.rock {
+    background: url('../img/map/rock.png') no-repeat center center/cover;
+
+}
+
+.grass {
+    background: url('../img/map/grass.png') no-repeat center center/cover;
+}
+
+.enemy-grass{
+    background: url('../img/map/enemyGrass.png') no-repeat center center/cover;
+}
+
+.front-fence {
+    background: url('../img/map/fence.png') no-repeat center bottom/contain;
+}
+.back-fence {
+    background: url('../img/map/fence.png') no-repeat center top/contain;
+}
+
+.right-side-fence {
+    background: url('../img/map/right-side-fence.png') no-repeat right center/contain;
+}
+
+.left-side-fence {
+    background: url('../img/map/left-side-fence.png') no-repeat center left/contain;
+}
+
+.tree{
+    background: url('../img/map/tree.png') no-repeat center center/cover;
+}
+
+.mushroom{
+    background: url('../img/map/mushroom.png') no-repeat center center/cover;
+}
+
+.half-grass{
+    background: url('../img/map/halfGrass.png') no-repeat center center/cover;
+}
+
+.half-grass-on-grass{
+    background: url('../img/map/halfGrass-on-grass.png') no-repeat center center/cover;
+
+}
+.mushroom-on-grass{
+    background: url('../img/map/mushroom-on-grass.png') no-repeat center center/cover;
+
+}
+
+.tree-on-grass{
+    background: url('../img/map/tree-on-grass.png') no-repeat center center/cover;
+}
+
+.rock-on-grass{
+    background: url('../img/map/rock-on-grass.png') no-repeat center center/cover;
+}
+
+.nurse{
+    background: url('../img/character/nurse/nurse.png')no-repeat center center/cover;
+}
+
+.oak{
+    background: url('../img/character/oak/oak.png')no-repeat center center/cover;
+}

@@ -1,0 +1,25 @@
+.btn {
+    background: none;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    height: 10vh;
+    width: 15vw;
+    margin: 1rem;
+    font-size: larger;
+}
+
+.btn a{
+    color: black;
+    text-decoration: none;
+}
+
+.attack-btn{
+    height: 7vh;
+    width: 10vw;
+}
+
+.btn:hover{
+    font-weight: bold;
+}
+

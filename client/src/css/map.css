@@ -1,0 +1,15 @@
+.map {
+    outline: none;
+    position: relative;
+    transition: all 0.35s;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    height: 85vh;
+}
+
+.world i{
+    position: absolute;
+    top: 5px;
+    left: 49%;
+}
