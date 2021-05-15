@@ -23,7 +23,9 @@ const homeSound = new Audio(HomeSound)
 
 function App() {
   //TODO: handleRun , validat that no more than 8 pokemons, 
+  
   const location = useHistory()
+
   location.listen((newLocation, action) => {
     if (action === "PUSH") {
       if (
@@ -43,6 +45,7 @@ function App() {
     }
   })
 
+
   const [user, setUser] = useState(null)
 
   const value = {
@@ -51,8 +54,12 @@ function App() {
   }
 
   const sounds = {
+
     landingSound: {
-      on: () => landingSound.play(),
+      on: () => {
+        landingSound.volume = 0.5
+        landingSound.play()
+      },
       pause: () => landingSound.pause(),
       off: () => {
         landingSound.pause()
@@ -60,7 +67,10 @@ function App() {
       },
     },
     battleSound: {
-      on: () => battleSound.play(),
+      on: () => {
+        battleSound.volume = 0.5
+        battleSound.play()
+      },
       pause: () => battleSound.pause(),
       off: () => {
         battleSound.pause()
@@ -68,7 +78,10 @@ function App() {
       }
     },
     winningSound: {
-      on: () => winningSound.play(),
+      on: () => {
+        winningSound.volume = 0.5
+        winningSound.play()
+      },
       pause: () => winningSound.pause(),
       off: () => {
         winningSound.pause()
@@ -76,7 +89,10 @@ function App() {
       }
     },
     healSound: {
-      on: () => healSound.play(),
+      on: () => {
+        healSound.volume = 0.8
+        healSound.play()
+      },
       pause: () => healSound.pause(),
       off: () => {
         healSound.pause()
@@ -84,7 +100,10 @@ function App() {
       }
     },
     forestSound: {
-      on: () => forestSound.play(),
+      on: () => {
+        forestSound.volume = 0.5
+        forestSound.play()
+      },
       pause: () => forestSound.pause(),
       off: () => {
         forestSound.pause()
@@ -92,7 +111,10 @@ function App() {
       }
     },
     homeSound:{
-      on:()=> homeSound.play(),
+      on:()=> {
+        homeSound.volume = 0.5
+        homeSound.play()
+      },
       pause: ()=> homeSound.pause(),
       off:()=>{
         homeSound.pause()
