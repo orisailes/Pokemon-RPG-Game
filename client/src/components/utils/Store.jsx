@@ -1,29 +1,9 @@
 import React from 'react'
 import pokemonsAttributes from '../../utils/classes/Pokemon/attributesList'
 import '../../css/store.css'
-const Store = ({ closeStore, pokemonBuying,user }) => {
-    const pokemonsNames = [
-        "scyther",
-        "hitmonlee",
-        "bulbasaur",
-        "caterpie",
-        "charmander",
-        "eevee",
-        "ekans",
-        "geodude",
-        "metapod",
-        "pidgey",
-        "pikachu",
-        "ponyta",
-        "psyduck",
-        "raticate",
-        "rattata",
-        "spearow",
-        "squirtle",
-        "voltorb",
-        "vulpix",
-        "weedle"
-    ]
+const Store = ({ closeStore, pokemonBuying, user }) => {
+
+    const pokemonsNames = Object.keys(pokemonsAttributes)
 
     const buy = (e) => {
         const pokemon = e.currentTarget.children[1].innerText
@@ -32,13 +12,13 @@ const Store = ({ closeStore, pokemonBuying,user }) => {
         let price = e.currentTarget.children[3].innerText.split('')
         price.splice(price.length - 1)
         price = Number(price.join(''))
-        const pokemonToBuy = {pokemon,level,price}
+        const pokemonToBuy = { pokemon, level, price }
         pokemonBuying(pokemonToBuy)
     }
 
     return (
         <div className="store-wrapper">
-            {!user && <strong style={{color:"red"}}>You have to login in order to buy</strong> }
+            {!user && <strong style={{ color: "red" }}>You have to login in order to buy</strong>}
             <h1>Pokemons Store</h1>
             <img
                 className="pokemons-desplayer-pokeball"
@@ -78,6 +58,9 @@ const Store = ({ closeStore, pokemonBuying,user }) => {
                         )
                     })
                 }
+            </div>
+            <div className="user-funds">
+                <p>You got: {user.money}<span className="dollar-sign">$</span></p>
             </div>
             <button className="exit-store-btn" onClick={() => closeStore()}>X</button>
         </div>

@@ -18,6 +18,7 @@ const Inventory = ({ user, showInventory, toggleInventory }) => {
                                     <h4>
                                         HP:{Math.floor((poke.hp/poke.maxHp)*100)}%
                                     </h4>
+                                    <h5>Lv: {poke.level}</h5>
                                     <ExpBar 
                                     pokemon={poke}/>
                                 </div>

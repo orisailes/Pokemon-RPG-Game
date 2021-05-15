@@ -3,3 +3,9 @@
 * {
     font-family: 'Aldrich', sans-serif;
 }
+
+a{
+    text-decoration: none;
+    font-weight: bolder;
+    color: black;
+}

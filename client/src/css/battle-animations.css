@@ -1,0 +1,207 @@
+@keyframes revealGame {
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes userPokemonDie {
+    to {
+        transform: translateY(30vh);
+    }
+}
+
+@keyframes enemyPokemonDie {
+    to {
+        transform: translateX(20vw);
+    }
+}
+
+@keyframes getHurt {
+    10% {
+        opacity: 0.2;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    30% {
+        opacity: 0.2;
+    }
+
+    40% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.2;
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 0.2;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 0.2;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes shield {
+    15% {
+        mix-blend-mode: luminosity;
+    }
+
+    30% {
+
+        mix-blend-mode: normal;
+    }
+
+    45% {
+        mix-blend-mode: luminosity;
+    }
+
+    60% {
+        mix-blend-mode: normal;
+    }
+
+    75% {
+        mix-blend-mode: luminosity;
+    }
+
+    100% {
+        mix-blend-mode: normal;
+    }
+}
+
+@keyframes userAttack {
+    50% {
+        transform: translate(10rem, -2.5rem);
+    }
+
+}
+
+@keyframes quickAttack {
+    30% {
+        transform: translate(7rem, -4.5rem);
+    }
+
+    45% {
+        transform: translate(0);
+    }
+
+    75% {
+        transform: translate(15rem, -2.5rem);
+    }
+}
+@keyframes enemyQuickAttack {
+    30% {
+        transform: translate(-7rem, 4.5rem);
+    }
+
+    45% {
+        transform: translate(0);
+    }
+
+    75% {
+        transform: translate(-15rem, 2.5rem);
+    }
+}
+
+@keyframes megaKick {
+    25% {
+        transform: translate(-2rem, 1rem);
+    }
+
+    50% {
+
+        transform: translate(17rem, -3rem);
+    }
+  
+}
+@keyframes enemyMegaKick {
+    25% {
+        transform: translate(2rem, -1rem);
+    }
+
+    50% {
+
+        transform: translate(-17rem, 3rem);
+    }
+  
+}
+
+@keyframes enemyAttack {
+    50% {
+        transform: translate(-10rem, 2.5rem);
+    }
+}
+
+@keyframes revelEnemyStats {
+    from {
+        transform: translateX(-35vw);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes revelUserStats {
+    from {
+        transform: translateX(35vw);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes revelUserPokemon {
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes revelEnemyPokemon {
+    from {
+        transform: translateX(35vw);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0vh);
+    }
+
+    25% {
+        transform: translateY(0.5vh);
+
+    }
+
+    75% {
+        transform: translateY(-0.5vh);
+
+    }
+
+    100% {
+        transform: translateY(0vh);
+
+    }
+}

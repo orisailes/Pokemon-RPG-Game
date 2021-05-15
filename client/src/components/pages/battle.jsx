@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect, useRef } from 'react'
 import { userContext } from '../../utils/context/userContext'
 import { Link, useHistory } from 'react-router-dom'
 import '../../css/battle.css'
+import '../../css/battle-animations.css'
 import Button from '../utils/Button'
 import Pokemon from '../utils/Pokemon'
 import makePokemon from '../../utils/classes/Pokemon/pokemonsGenerator'
@@ -13,7 +14,7 @@ import axios from 'axios'
 function Battle({ sounds }) {
     const { user, setUser } = useContext(userContext)
     const [enemyPokemon, setEnemyPokemon] = useState(null)
-    const [whoCauseDamage, setWhoCauseDamage] = useState([])
+    const [whoCauseDamage, setWhoCauseDamage] = useState({})
     const [chosenPokemon, setChosenPokemon] = useState({})
     const [endGameNewLevels, setEndGameNewLevels] = useState({})
     const [battleStarted, setBattleStarted] = useState(false)
@@ -32,34 +33,40 @@ function Battle({ sounds }) {
     const enemyPokemonRef = useRef(null)
     const location = useHistory()
 
-    if (user && enemyPokemon === null) {
-        const allPokes = Object.keys(attributesList)
-        const pokemonName = Math.floor(Math.random() * Object.keys(attributesList).length)
-        const pokemonChosen = allPokes[pokemonName]
-        console.log('pokemonChosen:', pokemonChosen)
-        const evilPoke = makePokemon(pokemonChosen, 5)
-        setEnemyPokemon(evilPoke)
-    } else if (enemyPokemon === null) {
-        setEnemyPokemon(makePokemon("rattata", 1))
-    }
+
 
     const wait = (ms) => {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    if (user && enemyPokemon === null) { // generate enemy pokemon
+        const allPokes = Object.keys(attributesList)
+        const pokemonName = Math.floor(Math.random() * Object.keys(attributesList).length)
+        const pokemonChosen = allPokes[pokemonName]
+        const avgUserPokLevel =
+            Math.round(
+                user.pokemons.reduce((sum, pokemon) => {
+                    return sum += pokemon.level
+                }, 0) / user.pokemons.length
+            )
+        const evilPoke = makePokemon(pokemonChosen, avgUserPokLevel)
+        setEnemyPokemon(evilPoke)
+    } else if (enemyPokemon === null) {
+        setEnemyPokemon(makePokemon("rattata", 1))
+    }
+
     useEffect(() => {
 
-        user && user.pokemons.forEach((poke) => whoCauseDamage[poke.name] = 0)
-        // !user && setMessage('PLEASE LOGIN')
-        console.log(user)
         const popGameUp = async () => { // make game visible! for better sound performance
             await wait(4000)
             setComponentVisible(true)
         }
         popGameUp()
+
         return () => {
-            sounds.battleSound.off()
+            sounds.battleSound.off() // cancling the sound when unmount
         }
+
     }, [])
 
 
@@ -74,6 +81,7 @@ function Battle({ sounds }) {
                 let newUser = _.cloneDeep(user)
                 let newLevels = {}
                 let levelUpCounters = {}
+
                 for (let pokemon in whoCauseDamage) {
                     const damagePercentCause = whoCauseDamage[pokemon] / (enemyPokemon.maxHp + enemyHealCharge)
                     if (damagePercentCause) {
@@ -175,7 +183,7 @@ function Battle({ sounds }) {
         //! battle manage
 
         setTurnIsActive(true)
-        setMessage(`${chosenPokemon.name.toUpperCase()} Use ${userAttack.toUpperCase()}!`)
+        setMessage(`${chosenPokemon.name.toUpperCase()} Use ${userAttack.replace("_", " ").toUpperCase()}!`)
         let enemyHelper = _.cloneDeep(enemyPokemon)
         let userHelper = _.cloneDeep(chosenPokemon)
         let isUserMiss = chosenPokemon.isHitTarget(enemyPokemon)
@@ -185,16 +193,12 @@ function Battle({ sounds }) {
         let enemyDead = false
         const randomEnemyAttack = enemyPokemon.attacks[Math.floor(Math.random() * enemyPokemon.attacks.length)]
         if (userAttack === "heal" || userAttack === "shield") {
-            await wait(1250)
             await handleStatsCharged(chosenPokemon, userAttack)
             userStatsCharged = true
         }
-        else {
-            userPokemonRef.current.classList.add("user-attacks")
-            await wait(750)
-            userPokemonRef.current.classList.remove("user-attacks")
-        }
-
+        userPokemonRef.current.classList.add(`${userAttack}`)
+        await wait(750)
+        userPokemonRef.current.classList.remove(`${userAttack}`)
         if (!isUserMiss && !userStatsCharged) {
             enemyPokemonRef.current.classList.add("get-hurt")
             await wait(500)
@@ -202,14 +206,10 @@ function Battle({ sounds }) {
             let userDamage = chosenPokemon.calculateDamage(enemyPokemon, userAttack)
             if (enemyHelper.hp < userDamage) userDamage = enemyHelper.hp
             enemyHelper.hp -= userDamage
-
             const manageCausingDamageHelper = { ...whoCauseDamage }
-            manageCausingDamageHelper[chosenPokemon.name] += userDamage
-
+            manageCausingDamageHelper[chosenPokemon.name] ? manageCausingDamageHelper[chosenPokemon.name] += userDamage : manageCausingDamageHelper[chosenPokemon.name] = userDamage
             setWhoCauseDamage(manageCausingDamageHelper)
-
             setEnemyPokemon(enemyHelper)
-
             if (enemyHelper.hp === 0) {
                 setMessage(`${enemyPokemon.name.toUpperCase()} Is DEAD!`)
                 await wait(1500)
@@ -233,14 +233,16 @@ function Battle({ sounds }) {
             if (randomEnemyAttack === "heal" || randomEnemyAttack === "shield") {
                 await handleStatsCharged(enemyHelper, randomEnemyAttack)
                 enemyStatsCharged = true
+                enemyPokemonRef.current.classList.add(`${randomEnemyAttack}`)
                 await wait(1500)
+                enemyPokemonRef.current.classList.remove(`${randomEnemyAttack}`)
                 setMessage(`Its ${chosenPokemon.name.toUpperCase()} Turn...`)
                 setEnemyPokemon(enemyHelper)
                 setTurnIsActive(false)
             } else {
-                enemyPokemonRef.current.classList.add("enemy-attacks")
+                enemyPokemonRef.current.classList.add(`enemy-${randomEnemyAttack}`)
                 await wait(500)
-                enemyPokemonRef.current.classList.remove("enemy-attacks")
+                enemyPokemonRef.current.classList.remove(`enemy-${randomEnemyAttack}`)
             }
 
             if (!isEnemyMiss && !enemyStatsCharged) {
@@ -276,7 +278,7 @@ function Battle({ sounds }) {
         const pokemonName = e.currentTarget.id
         const pokemon = user.pokemons.find(poke => poke.name === pokemonName)
         pokemon.hp > 0 && setChosenPokemon(pokemon)
-        setBattleStarted(true)
+        pokemon.hp > 0 && setBattleStarted(true)
     }
 
     const handleChangePokemon = () => {
@@ -319,6 +321,11 @@ function Battle({ sounds }) {
     return (
 
         <>
+            <i
+                className={`${musicOff ? "fas fa-volume-mute fa-lg battle-page-volume-btn" : "fas fa-volume-up fa-lg battle-page-volume-btn"}`}
+                onClick={toggleMusic}
+            >
+            </i>
             <div className="first-hider-battle-page" style={{ visibility: `${componentVisible ? "hidden" : "visible"}` }}></div>
             <div
                 className="battle-page" // 70% of the upper side screen
@@ -329,10 +336,9 @@ function Battle({ sounds }) {
                         <div className="hider">
                             <div>
                                 <h1>R.I.P</h1>
-                                <button text="BACK" onClick={() => {
+                                <button className="btn" text="BACK" onClick={() => {
                                     sounds.battleSound.off()
                                     sounds.winningSound.off()
-                                    location.goBack()
                                 }} ><Link to={{ pathname: '/world', state: { userBackFromBattle: false, healPokemons: true } }}>BACK</Link></button>
                             </div>
                         </div>
@@ -365,11 +371,13 @@ function Battle({ sounds }) {
                                     New Money: <span className="user-money-span">{user.money}$</span>
                                 </h3>
                             </div>
-                            <button text="BACK" onClick={() => {
-                                sounds.battleSound.off()
-                                sounds.winningSound.off()
-                                location.goBack()
-                            }} ><Link to={{ pathname: '/world', state: { userBackFromBattle: true } }}>BACK</Link></button>
+                            <Link
+                                style={{ color: "whitesmoke" }}
+                                onClick={() => {
+                                    sounds.battleSound.off()
+                                    sounds.winningSound.off()
+                                }} to={{ pathname: '/world', state: { userBackFromBattle: true } }}>BACK
+                           </Link>
                         </div>
                     : null
                 }
@@ -452,6 +460,7 @@ function Battle({ sounds }) {
                                         <div className="first-btn">
 
                                             <button
+                                                style={{ height: "fit-content" }}
                                                 className="btn"
                                                 disabled={turnIsActive}
                                                 onClick={() => setIsBattleWanted(false)}
@@ -486,9 +495,7 @@ function Battle({ sounds }) {
                                             <>
                                                 <Button
                                                     turnIsActive={turnIsActive} onClick={() => {
-                                                        {
-                                                            setDisplayOptions(false)
-                                                        }
+                                                        setDisplayOptions(false)
                                                     }}
                                                     text="fight" />
 
@@ -530,11 +537,7 @@ function Battle({ sounds }) {
                 </div>
 
 
-                <i
-                    className={`${musicOff ? "fas fa-volume-mute fa-lg battle-page-volume-btn" : "fas fa-volume-up fa-lg battle-page-volume-btn"}`}
-                    onClick={toggleMusic}
-                >
-                </i>
+
             </div >
         </>
     )

@@ -67,7 +67,6 @@ const Home = ({ sounds }) => {
                 }
                 setUser(newUser.data)
                 setIsUserLoggedIn(true)
-                console.log('newUser:', newUser)
             } catch (err) {
                 console.log(err.message)
                 setError("Invalid email or password")
@@ -87,17 +86,12 @@ const Home = ({ sounds }) => {
 
 
     const initialPokemonChoose = async (pokemon) => {
-        console.log(pokemon)
-        console.log('pokemonGenerator:', makePokemon)
         const newPokemon = makePokemon(pokemon, 5)
         let helper = { ...user }
         helper.pokemons.push(newPokemon)
         setUser(helper)
-        const test = await axios.put(`/api/users/${user.email}`, helper)
-        console.log(test);
-        console.log(helper.pokemons);
+        await axios.put(`/api/users/${user.email}`, helper)
         sounds.landingSound.off()
-
         location.push('/world')
     }
 
@@ -109,13 +103,17 @@ const Home = ({ sounds }) => {
     return (
         <>
             {
-                <div onClick={playMusic} className="landing-page">
-                    <div className="login-popup-container" >
-
+                <div
+                    onClick={playMusic}
+                    className="landing-page">
+                    <div
+                        className="login-popup-container" >
                         {
                             newUserCreated ?
-                                <div className="initial-pokemon-choose">
-                                    <PokemonsDesplayer initialPokemonChoose={initialPokemonChoose} />
+                                <div
+                                    className="initial-pokemon-choose">
+                                    <PokemonsDesplayer
+                                        initialPokemonChoose={initialPokemonChoose} />
                                 </div>
                                 : !isUserLoggedIn &&
                                 <>
@@ -127,16 +125,16 @@ const Home = ({ sounds }) => {
                                         onFormSubmit={onFormSubmit}
                                         error={error}
                                     />
-
-                                    {isMusicPlaying &&
-                                        <i
-                                            className={`${musicOff ? "fas fa-volume-mute fa-lg" : "fas fa-volume-up fa-lg"}`}
-                                            onClick={() => {
-                                                musicOff ? sounds.landingSound.on() : sounds.landingSound.pause()
-                                                setMusicOff(prev => !prev)
-                                            }}
-                                        >
-                                        </i>}
+                                    <i
+                                        style={
+                                            isMusicPlaying ? { visibility: "visible" } : { visibility: "hidden" }}
+                                        className={`${musicOff ? "fas fa-volume-mute fa-lg" : "fas fa-volume-up fa-lg"}`}
+                                        onClick={() => {
+                                            musicOff ? sounds.landingSound.on() : sounds.landingSound.pause()
+                                            setMusicOff(prev => !prev)
+                                        }}
+                                    >
+                                    </i>
                                 </>
 
                         }
@@ -145,8 +143,10 @@ const Home = ({ sounds }) => {
                             (isUserLoggedIn && user.pokemons.length > 0) ?
                                 startGame()
                                 : (isUserLoggedIn && user.pokemons.length === 0) &&
-                                <div className="initial-pokemon-choose">
-                                    <PokemonsDesplayer initialPokemonChoose={initialPokemonChoose} />
+                                <div
+                                    className="initial-pokemon-choose">
+                                    <PokemonsDesplayer
+                                        initialPokemonChoose={initialPokemonChoose} />
                                 </div>
                         }
 

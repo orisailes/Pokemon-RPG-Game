@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, useRef } from 'react'
 import { userContext } from '../../utils/context/userContext'
 import { useLocation } from 'react-router-dom'
 import Map from '../utils/Map'
@@ -8,7 +8,7 @@ import PreBuy from '../utils/PreBuy'
 import Inventory from '../utils/Inventory'
 import tilesDefiner from './maps/index'
 import axios from 'axios'
-import pokemonsGenerator from '../../utils/classes/Pokemon/pokemonsGenerator'
+import makePokemon from '../../utils/classes/Pokemon/pokemonsGenerator'
 import _ from 'lodash'
 import '../../css/world.css'
 
@@ -17,19 +17,20 @@ const World = ({ sounds }) => {
 
     const data = useLocation()
 
+
+    //TODO: fix sound icon bug, impove store,chatting and home character css  
+
     const [isCharacterInHome, setIsCharacterInHome] = useState(data.state ? data.state.userBackFromBattle ? false : true : true)
-    const [isCharacterMoveToForest, setIsCharacterMoveToForest] = useState(false)
     const [store, setStore] = useState(false)
     const [pokemonUserWantToBuy, setPokemonUserWantToBuy] = useState(null)
     const [isChatting, setIsChatting] = useState('')
     const [preBuyText, setPreBuyText] = useState('')
     const [mapMusicOff, setMapMusicOff] = useState(false)
-    let [chatFireLine, setChatFireLine] = useState(0)
     const [isInventoryOpen, setIsInventoryOpen] = useState(false)
+    let [chatFireLine, setChatFireLine] = useState(0)
+    const mapRef = useRef(null)
 
 
-
-    //TODO: generate enemy , positioning the character
 
     const chatInfo = {
         oak: ["Hey folk! Looking for new pokemon?", "There will no discounts for you!"],
@@ -46,6 +47,9 @@ const World = ({ sounds }) => {
                 healUserPokemons()
             }
         }
+
+        mapRef.current.focus()
+
     }, [])
 
 
@@ -59,6 +63,7 @@ const World = ({ sounds }) => {
             sounds.forestSound.on()
             sounds.homeSound.off()
         }
+        setMapMusicOff(false)
         setIsCharacterInHome(prev => !prev)
     }
 
@@ -107,6 +112,7 @@ const World = ({ sounds }) => {
 
     const closeStore = () => {
         setStore(false)
+        mapRef.current.focus()
     }
 
     const pokemonBuying = (pokemonToBuy) => {
@@ -117,11 +123,23 @@ const World = ({ sounds }) => {
         if (!user) {
             setPreBuyText('You have to login first.')
         } if (user) {
-            if (user.money < pokemon.price) {
+            let duplicateTest = user.pokemons.every((userPokemon) => userPokemon.name !== pokemon.pokemon)
+
+            if (user.money < pokemon.price) { // if user have no cash
                 setPreBuyText('Not enough funds')
             }
-            if (user.money >= pokemon.price) {
-                let newPokemon = pokemonsGenerator.makePokemon(pokemon.pokemon, pokemon.level)
+
+            if (!duplicateTest) { // if user want to buy the same pokemon twice  
+                setPreBuyText('You cant have the same pokemon twice')
+            }
+
+            if (user.pokemons.length >= 8) { // if user got 8 pokemons
+                setPreBuyText('You cant have more than 8 Pokemons!')
+
+            }
+
+            if (user.money >= pokemon.price && duplicateTest && user.pokemons.length < 9) {
+                let newPokemon = makePokemon(pokemon.pokemon, pokemon.level)
                 let helper = _.cloneDeep(user)
                 helper.money -= pokemon.price
                 helper.pokemons.push(newPokemon)
@@ -130,8 +148,6 @@ const World = ({ sounds }) => {
                 setPreBuyText('Pokemon buy succesfully')
             }
         }
-        console.log('user:', user)
-        console.log('pokemon:', pokemon)
     }
 
     const cancelBuy = () => {
@@ -146,6 +162,7 @@ const World = ({ sounds }) => {
         } else {
             isCharacterInHome ? sounds.homeSound.pause() : sounds.forestSound.pause()
         }
+        mapRef.current.focus()
         setMapMusicOff(prev => !prev)
     }
 
@@ -160,22 +177,39 @@ const World = ({ sounds }) => {
             onKeyDown={(e) => { handleChattingFlow(e) }}
         >
             <Map
+                forwardedRef={mapRef}
                 sounds={sounds}
                 toggleChat={toggleChat}
                 toggleMap={toggleMap}
                 isCharacterInHome={isCharacterInHome}
-                tiles={(isCharacterInHome && !isCharacterMoveToForest) ? tilesDefiner.home : tilesDefiner.forest}
+                tiles={isCharacterInHome ? tilesDefiner.home : tilesDefiner.forest}
                 mapMusicOff={mapMusicOff}
                 toggleMusic={toggleMusic}
             />
 
-            <Inventory toggleInventory={toggleInventory} showInventory={isInventoryOpen} user={user} />
+            <Inventory
+                toggleInventory={toggleInventory}
+                showInventory={isInventoryOpen}
+                user={user} />
 
-            {isChatting && <Chat text={chatInfo[isChatting][chatFireLine]} />}
+            <i
+                className={`${mapMusicOff ? "fas fa-volume-mute fa-lg" : "fas fa-volume-up fa-lg"} `}
+                onClick={() => toggleMusic()}
+            >
+            </i>
+
+            {isChatting &&
+                <Chat
+                    text={chatInfo[isChatting][chatFireLine]}
+                />}
 
             {store &&
                 <>
-                    <Store pokemonBuying={pokemonBuying} user={user} closeStore={closeStore} />
+                    <Store
+                        pokemonBuying={pokemonBuying}
+                        user={user}
+                        closeStore={closeStore} />
+
                     { (pokemonUserWantToBuy && user) &&
                         <PreBuy
                             cancel={cancelBuy}
@@ -185,6 +219,7 @@ const World = ({ sounds }) => {
                             user={user}
                         />
                     }
+
                 </>
             }
 

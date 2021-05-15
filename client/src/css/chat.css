@@ -6,7 +6,7 @@
   bottom: 2vh;
   left: 2.5vw;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   text-align: center;
 }
 
@@ -14,5 +14,5 @@
 
 .chat-box>p {
 
-  margin: 2rem;
+  margin: 4rem;
 }

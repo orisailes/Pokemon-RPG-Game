@@ -27,9 +27,20 @@
     border: 2px solid #78A0F8;
     opacity: 0.9;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     flex-direction: column;
+    padding: 1rem;
+}
+
+.login-popup .password-input{
+    position: relative;
+}
+
+.login-popup .eye-toggle-icon{
+    position: absolute;
+    right: 5%;
+    bottom: 25%;
 }
 
 .login-popup form {
@@ -38,6 +49,15 @@
     align-items: center;
     flex-direction: column;
     margin: 0;
+}
+
+.login-popup .opt-btn-container footer{
+    font-size: 0.5rem;
+    text-align: center;
+}
+
+.login-popup form label {
+    margin: 0.45rem;
 }
 
 .login-popup form input {

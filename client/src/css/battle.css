@@ -19,19 +19,18 @@
     height: 100vh;
     width: 100vw;
     position: absolute;
-    z-index: 1235100;
     top: 0;
     left: 0;
-    /* background: url('../img/utils/battleZone.png') no-repeat center center/cover; */
     background-color: black;
     animation: revealGame 3s forwards linear;
-    animation-delay:1s ;
+    animation-delay: 1s;
 }
 
 .battle-page-volume-btn {
     position: absolute;
     top: 5px;
     left: 49%;
+    z-index: 1234542131564123;
 }
 
 .pokemon-choose-div {
@@ -190,16 +189,47 @@
     height: 12vh;
 }
 
-.user-attacks {
+.punch,
+.lighting,
+.cut,
+.tornado,
+.water_splash {
     animation: userAttack 0.25s backwards ease-in-out;
 }
 
-.enemy-attacks {
+.quick_attack {
+    animation: quickAttack 0.2s backwards ease-in-out;
+}
+
+.enemy-punch,
+.enemy-lighting,
+.enemy-cut,
+.enemy-tornado,
+.enemy-water_splash {
     animation: enemyAttack 0.25s backwards ease-in-out;
 }
 
+.mega_kick,
+.kick {
+    animation: megaKick 0.45s backwards ease-in;
+}
+
+.enemy-quick_attack {
+    animation: enemyQuickAttack 0.2s backwards ease-in-out;
+}
+
+.enemy-mega_kick,
+.enemy-kick {
+    animation: enemyMegaKick 0.45s backwards ease-in;
+
+}
+
 .get-hurt {
-    animation: getHurt 0.5s backwards ease-in-out;
+    animation: getHurt 0.25s backwards ease-in-out;
+}
+
+.shield {
+    animation: shield 1.25s backwards ease-in-out;
 }
 
 .user-pokemon-die {
@@ -259,136 +289,4 @@
     align-items: center;
     overflow: hidden;
     width: 100vw;
-}
-
-
-@keyframes revealGame {
-    to{
-        opacity: 0;
-    }
-}
-
-@keyframes userPokemonDie {
-    to {
-        transform: translateY(30vh);
-    }
-}
-
-@keyframes enemyPokemonDie {
-    to {
-        transform: translateX(20vw);
-    }
-}
-
-@keyframes getHurt {
-    10% {
-        opacity: 0.2;
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    30% {
-        opacity: 0.2;
-    }
-
-    40% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.2;
-    }
-
-    60% {
-        opacity: 1;
-    }
-
-    70% {
-        opacity: 0.2;
-    }
-
-    80% {
-        opacity: 1;
-    }
-
-    90% {
-        opacity: 0.2;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@keyframes userAttack {
-    50% {
-        transform: translate(10rem, -2.5rem);
-    }
-
-}
-
-@keyframes enemyAttack {
-    50% {
-        transform: translate(-10rem, 2.5rem);
-    }
-}
-
-@keyframes revelEnemyStats {
-    from {
-        transform: translateX(-35vw);
-    }
-
-    to {
-        transform: translateX(0);
-    }
-}
-
-@keyframes revelUserStats {
-    from {
-        transform: translateX(35vw);
-    }
-
-    to {
-        transform: translateX(0);
-    }
-}
-
-@keyframes revelUserPokemon {
-
-    to {
-        transform: translateX(0);
-    }
-}
-
-@keyframes revelEnemyPokemon {
-    from {
-        transform: translateX(35vw);
-    }
-
-    to {
-        transform: translateX(0);
-    }
-}
-
-@keyframes float {
-    0% {
-        transform: translateY(0vh);
-    }
-
-    25% {
-        transform: translateY(0.5vh);
-
-    }
-
-    75% {
-        transform: translateY(-0.5vh);
-
-    }
-
-    100% {
-        transform: translateY(0vh);
-
-    }
 }
