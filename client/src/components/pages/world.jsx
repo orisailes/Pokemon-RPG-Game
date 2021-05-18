@@ -6,13 +6,14 @@ import Chat from '../utils/Chat'
 import Store from '../utils/Store'
 import PreBuy from '../utils/PreBuy'
 import Inventory from '../utils/Inventory'
+import Toturial from '../utils/Toturial'
 import tilesDefiner from './maps/index'
 import axios from 'axios'
 import makePokemon from '../../utils/classes/Pokemon/pokemonsGenerator'
 import _ from 'lodash'
 import '../../css/world.css'
 
-const World = ({ sounds }) => {
+const World = ({ sounds, showToturial, setShowToturial }) => {
     const { user, setUser } = useContext(userContext)
 
     const data = useLocation()
@@ -197,13 +198,22 @@ const World = ({ sounds }) => {
                 onClick={() => toggleMusic()}
             >
             </i>
+            {
+                showToturial &&
+                <Toturial 
+                setShowToturial={setShowToturial}
+                mapRef={mapRef}
+                />
+            }
 
-            {isChatting &&
+            {
+                isChatting &&
                 <Chat
                     text={chatInfo[isChatting][chatFireLine]}
                 />}
 
-            {store &&
+            {
+                store &&
                 <>
                     <Store
                         pokemonBuying={pokemonBuying}
