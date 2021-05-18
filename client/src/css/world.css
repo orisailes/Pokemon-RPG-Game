@@ -1,0 +1,46 @@
+.world{
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.inventory-btn{
+    position: absolute;
+    top: 0;
+    left: 52%;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+
+.inventory-btn img{
+height: 5vh;
+color: black;
+}
+
+.world .inventory-displayer{
+    height: 50vh;
+    width: 70vw;
+    background: black;
+    position: absolute;
+    top: 20vh;
+    left: -33vw;
+    overflow: hidden;
+    color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.world .inventory-displayer .inventory-pokemon-div {
+    margin: 0.4rem;
+    height: fit-content;
+}
+
+.world .inventory-displayer .inventory-pokemon-div .exp-bar{
+    width: 100%;
+    border-radius: none;
+}

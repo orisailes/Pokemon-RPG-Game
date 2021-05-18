@@ -1,0 +1,48 @@
+.toturial {
+    position: absolute;
+    background: rgba(220, 217, 124);
+    background: url('../img/utils/message-box.png') no-repeat center center/contain;
+    top: 20vh;
+    left: 20vw;
+    height: 60vh;
+    width: 60vw;
+    color: black;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    transform: translateY(25vh);
+    opacity: 0;
+    animation: revel 1s forwards;
+}
+
+.toturial-grid {
+    display: grid;
+    text-align: center;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 3fr 2fr;
+    align-items: center;
+    width: 90%;
+    height: 50%;
+    position: relative;
+    margin: auto;
+}
+
+.toturial-grid img{
+    height: 8vh;
+}
+
+.toturial .btn {
+    margin: auto;
+    grid-column: span 4;
+}
+
+.toturial .btn i {
+    display: none;
+}
+
+@keyframes revel {
+    to {
+        transform: translate(0);
+        opacity: 1;
+    }
+}

@@ -1,0 +1,88 @@
+.stats-container {
+    height: 60%;
+    width: 30%;
+    background-color: #f6f5e1;
+    margin: 1rem;
+    border-radius: 5px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.179);
+    /*         X     Y   SPREAD */
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.stats-heading {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.stats-heading .type-img {
+    height: 7vh;
+    margin: auto 0;
+}
+
+.hp-container {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-self: center;
+    align-self: center;
+}
+
+.hp-bar {
+    width: 80%;
+    height: 3vh;
+    border-radius: 5px;
+    background-color: rgb(233, 233, 233);
+}
+
+.hp-bar .progress {
+    border-radius: 5px;
+    height: 100%;
+    background-color: rgb(62, 122, 235);
+    transition: all 0.5s linear;
+}
+
+.enemy-pokemon .hp-bar {
+    float: right;
+}
+
+.exp-container {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    width: 80%;
+}
+
+.exp-bar {
+    width: 40%;
+    height: 1.5vh;
+    border-radius: 3px;
+    background-color: rgb(111, 111, 111);
+}
+
+.exp-progress {
+    border-radius: 3px;
+    height: 100%;
+    background-color: rgb(62, 122, 235);
+    transition: all 0.5s linear;
+}
+
+.hp-container p {
+    margin: auto 10px;
+}
+
+.exp-container small {
+    margin: auto 4px;
+}
+
+
+.user-stats-container {
+    animation: revelUserStats 1s forwards;
+}
+
+.enemy-stats-container {
+    animation: revelEnemyStats 1s forwards;
+}

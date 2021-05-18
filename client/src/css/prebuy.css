@@ -1,0 +1,58 @@
+.prebuy {
+    position: absolute;
+    background: rgba(220, 217, 124);
+    background: url('../img/utils/message-box.png') no-repeat center center/contain;
+    top: 30vh;
+    left: 30vw;
+    height: 40vh;
+    width: 40vw;
+    color: black;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+  
+}
+
+.prebuy-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 3fr 2fr;
+    align-items: center;
+    text-align: center;
+    width: 90%;
+    height: 50%;
+    position: relative;
+    margin: auto;
+}
+
+.prebuy img {
+    height: 20vh;
+    margin: 0;
+}
+
+.prebuy .dollar-sign {
+    font-size: larger;
+    color: #3d9634;
+}
+
+.prebuy .btn-container .btn {
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    margin: 0.2rem 0;
+}
+
+.prebuy .btn-container i {
+    display: none;
+}
+
+.prebuy .you-got {
+    text-align: center;
+}
+
+.prebuy .prebuy-text {
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+    width: 100%;
+}
