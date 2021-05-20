@@ -1,13 +1,12 @@
 import React from 'react';
 import StatsContainer from './StatsContainer'
-import '../../css/pokemon.css';
 
-function Pokemon({ isUserPokemon, pokemon,forwardedRef }) {
-    debugger
+function Pokemon({ isUserPokemon, pokemon, forwardedRef, enemyClassName }) {
+
     return (
         <div className={`pokemon  ${isUserPokemon ? "user-pokemon" : "enemy-pokemon"}`}>
             <img
-                className={`${isUserPokemon ? "user-pokemon-img" : "enemy-pokemon-img"}`}
+                className={` ${isUserPokemon ? "user-pokemon-img" : enemyClassName}`}
                 src={require(`../../img/pokemon-${isUserPokemon ? "back" : "front"}/${pokemon.name}.png`).default}
                 alt={pokemon.name}
                 ref={forwardedRef}

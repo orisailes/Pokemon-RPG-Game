@@ -23,6 +23,9 @@ const Tile = ({ tile }) => {
         case 3:
             className = "trail"
             break;
+        case null:
+            className = "grass"
+            break;
         case -4:
             className = "rock"
             break;
@@ -53,6 +56,8 @@ const Tile = ({ tile }) => {
         case 90:
             className = "mushroom-on-grass"
             break;
+        case undefined:
+            className = ""
         case -101:
             className = "nurse"
             break;
@@ -62,7 +67,6 @@ const Tile = ({ tile }) => {
         default:
             break;
     }
-
     return (
         <div
             className={className}

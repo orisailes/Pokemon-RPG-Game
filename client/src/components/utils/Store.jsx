@@ -1,7 +1,7 @@
 import React from 'react'
 import pokemonsAttributes from '../../utils/classes/Pokemon/attributesList'
 import '../../css/store.css'
-const Store = ({ closeStore, pokemonBuying, user }) => {
+const Store = ({ closeStore, storeBuying, user }) => {
 
     const pokemonsNames = Object.keys(pokemonsAttributes)
 
@@ -13,19 +13,21 @@ const Store = ({ closeStore, pokemonBuying, user }) => {
         price.splice(price.length - 1)
         price = Number(price.join(''))
         const pokemonToBuy = { pokemon, level, price }
-        pokemonBuying(pokemonToBuy)
+        storeBuying(pokemonToBuy)
+    }
+
+    const handlePokeballBuy = () => {
+        if (user) {
+            console.log(user.money);
+            storeBuying("pokeball")
+        }
     }
 
     return (
         <div className="store-wrapper">
             {!user && <strong style={{ color: "red" }}>You have to login in order to buy</strong>}
             <h1>Pokemons Store</h1>
-            <img
-                className="pokemons-desplayer-pokeball"
-                src={require('../../img/home/pokeball.png').default}
-                alt="pokeball"
-            >
-            </img>
+
             <div className="content">
                 {
                     pokemonsNames.map((pokemon) => {
@@ -59,9 +61,30 @@ const Store = ({ closeStore, pokemonBuying, user }) => {
                     })
                 }
             </div>
-            <div className="user-funds">
-                <p>You got: {user.money}<span className="dollar-sign">$</span></p>
+            <div
+                className="pokeball"
+                onClick={handlePokeballBuy}
+            >
+                <img
+                    className="pokemons-desplayer-pokeball"
+                    src={require('../../img/home/pokeball.png').default}
+                    alt="pokeball"
+                >
+                </img>
+                <p>
+                    Pokeball<br></br>400
+                <span className="dollar-sign">
+                        $
+                 </span>
+                </p>
             </div>
+
+            {user &&
+                <div className="user-funds">
+                    <p>You got: {user.money}<span className="dollar-sign">$</span></p>
+                </div>
+            }
+
             <button className="exit-store-btn" onClick={() => closeStore()}>X</button>
         </div>
     )

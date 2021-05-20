@@ -21,6 +21,12 @@ const PreBuy = ({ setShowToturial,mapRef }) => {
                         </p>
                         <img src={require('../../img/toturial/space_toturial.png').default} alt="space" />
                     </div>
+                    <div className="to-forest">
+                        <p>
+                            To Forest
+                        </p>
+                        <img src={require('../../img/toturial/to_forest.png').default} alt="toForest" />
+                    </div>
                     <div>
                         <p>
                             Look for wild Pokemons

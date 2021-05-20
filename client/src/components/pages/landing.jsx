@@ -10,13 +10,12 @@ import PokemonsDesplayer from '../utils/PokemonsDesplayer'
 import makePokemon from '../../utils/classes/Pokemon/pokemonsGenerator'
 
 
-const Home = ({ sounds }) => {
+const Home = ({ sounds,musicOff,setMusicOff  }) => {
 
     //TODO: cant get two pokemons the same
 
     const { user, setUser } = useContext(userContext)
     const [isMusicPlaying, setIsMusicPlaying] = useState(false)
-    const [musicOff, setMusicOff] = useState(false)
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')

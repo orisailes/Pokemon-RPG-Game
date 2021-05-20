@@ -11,7 +11,7 @@ import _ from 'lodash';
 import ExpBar from '../utils/ExpBar'
 import axios from 'axios'
 
-function Battle({ sounds }) {
+function Battle({ sounds, musicOff, setMusicOff }) {
     const { user, setUser } = useContext(userContext)
     const [enemyPokemon, setEnemyPokemon] = useState(null)
     const [whoCauseDamage, setWhoCauseDamage] = useState({})
@@ -23,8 +23,10 @@ function Battle({ sounds }) {
     const [gameOver, setGameOver] = useState(false)
     const [isUserLose, setIsUserLose] = useState(false)
     const [gameEndHider, setGameEndHider] = useState(false)
-    const [musicOff, setMusicOff] = useState(false)
     const [componentVisible, setComponentVisible] = useState(false)
+    const [captureFailed, setCaptureFailed] = useState(false)
+    const [prePokeballThrow, setPrePokeballThrow] = useState(false)
+    const [pokeballThrow, setPokeballThrow] = useState(false)
     const [displayOptions, setDisplayOptions] = useState(true)
     const [isBattleWanted, setIsBattleWanted] = useState(null)
     const [enemyHealCharge, setEnemyHealCharge] = useState(0)
@@ -75,8 +77,10 @@ function Battle({ sounds }) {
         const endGameSession = async () => {
             const isPokemonLeft = user && user.pokemons.find((pokemon) => pokemon.hp > 0)
             if (gameOver && isPokemonLeft) {
-                sounds.battleSound.off()
-                sounds.winningSound.on()
+                if (!musicOff) {
+                    sounds.battleSound.off()
+                    sounds.winningSound.on()
+                }
                 await wait(1000)
                 let newUser = _.cloneDeep(user)
                 let newLevels = {}
@@ -109,12 +113,9 @@ function Battle({ sounds }) {
                     money: newUser.money,
                     pokemons: newUser.pokemons,
                 })
-                await wait(3000)
-                await wait(500)
+                await wait(3500)
             }
-            if (gameOver && isUserLose) {
 
-            }
         }
         endGameSession()
 
@@ -181,47 +182,48 @@ function Battle({ sounds }) {
         enemyPokemonRef.current && enemyPokemonRef.current.classList.remove("enemy-pokemon-img")
 
         //! battle manage
-
         setTurnIsActive(true)
         setMessage(`${chosenPokemon.name.toUpperCase()} Use ${userAttack.replace("_", " ").toUpperCase()}!`)
-        let enemyHelper = _.cloneDeep(enemyPokemon)
         let userHelper = _.cloneDeep(chosenPokemon)
         let isUserMiss = chosenPokemon.isHitTarget(enemyPokemon)
-        let isEnemyMiss = enemyPokemon.isHitTarget(chosenPokemon)
         let userStatsCharged = false
         let enemyStatsCharged = false
         let enemyDead = false
+        let enemyHelper = _.cloneDeep(enemyPokemon)
+        let isEnemyMiss = enemyPokemon.isHitTarget(chosenPokemon)
         const randomEnemyAttack = enemyPokemon.attacks[Math.floor(Math.random() * enemyPokemon.attacks.length)]
-        if (userAttack === "heal" || userAttack === "shield") {
-            await handleStatsCharged(chosenPokemon, userAttack)
-            userStatsCharged = true
-        }
-        userPokemonRef.current.classList.add(`${userAttack}`)
-        await wait(750)
-        userPokemonRef.current.classList.remove(`${userAttack}`)
-        if (!isUserMiss && !userStatsCharged) {
-            enemyPokemonRef.current.classList.add("get-hurt")
-            await wait(500)
-            enemyPokemonRef.current.classList.remove("get-hurt")
-            let userDamage = chosenPokemon.calculateDamage(enemyPokemon, userAttack)
-            if (enemyHelper.hp < userDamage) userDamage = enemyHelper.hp
-            enemyHelper.hp -= userDamage
-            const manageCausingDamageHelper = { ...whoCauseDamage }
-            manageCausingDamageHelper[chosenPokemon.name] ? manageCausingDamageHelper[chosenPokemon.name] += userDamage : manageCausingDamageHelper[chosenPokemon.name] = userDamage
-            setWhoCauseDamage(manageCausingDamageHelper)
-            setEnemyPokemon(enemyHelper)
-            if (enemyHelper.hp === 0) {
-                setMessage(`${enemyPokemon.name.toUpperCase()} Is DEAD!`)
-                await wait(1500)
-                enemyDead = true
-                // using use effect above, to do better rendering job
+        if (userAttack !== "throwPokeball") {
+            if (userAttack === "heal" || userAttack === "shield") {
+                await handleStatsCharged(chosenPokemon, userAttack)
+                userStatsCharged = true
             }
-        }
-        if (isUserMiss && !userStatsCharged) {
-            await wait(500)
-            setMessage(`It wasn't very effective...`)
-            await wait(1500)
+            userPokemonRef.current.classList.add(`${userAttack}`)
+            await wait(750)
+            userPokemonRef.current.classList.remove(`${userAttack}`)
+            if (!isUserMiss && !userStatsCharged) {
+                enemyPokemonRef.current.classList.add("get-hurt")
+                await wait(500)
+                enemyPokemonRef.current.classList.remove("get-hurt")
+                let userDamage = chosenPokemon.calculateDamage(enemyPokemon, userAttack)
+                if (enemyHelper.hp < userDamage) userDamage = enemyHelper.hp
+                enemyHelper.hp -= userDamage
+                const manageCausingDamageHelper = { ...whoCauseDamage }
+                manageCausingDamageHelper[chosenPokemon.name] ? manageCausingDamageHelper[chosenPokemon.name] += userDamage : manageCausingDamageHelper[chosenPokemon.name] = userDamage
+                setWhoCauseDamage(manageCausingDamageHelper)
+                setEnemyPokemon(enemyHelper)
+                if (enemyHelper.hp === 0) {
+                    setMessage(`${enemyPokemon.name.toUpperCase()} Is DEAD!`)
+                    await wait(1500)
+                    enemyDead = true
+                    // using use effect above, to do better rendering job
+                }
+            }
+            if (isUserMiss && !userStatsCharged) {
+                await wait(500)
+                setMessage(`It wasn't very effective...`)
+                await wait(1500)
 
+            }
         }
 
         // enemy turn from here
@@ -318,6 +320,34 @@ function Battle({ sounds }) {
         setMusicOff(prev => !prev)
     }
 
+    const handlePrePokeballThrow = () => {
+        setPrePokeballThrow(true)
+    }
+    const handlePokeballThrow = async () => {
+        setPrePokeballThrow(false)
+        setPokeballThrow(true)
+        setTurnIsActive(true)
+        await wait(6000) // animation running
+        let isCapture = enemyPokemon.isCapture()
+        debugger
+        let newUser = _.cloneDeep(user)
+        const isDuplicate = newUser.pokemons.find((poke => poke.name === enemyPokemon.name))
+        if (isDuplicate) isCapture = false // prevent duplicate pokemons at user (bug protector)
+        newUser.pokeballs -= 1
+        if (isCapture) {
+            newUser.pokemons.push(enemyPokemon)
+            setGameOver(true)
+        }
+        if (!isCapture) {
+            manageBattle("throwPokeball")
+            setPokeballThrow(false)
+            setCaptureFailed(true)
+        }
+        setUser(newUser)
+        await axios.put(`/api/users/${newUser.email}`, newUser)
+        await wait(1500)
+    }
+
     return (
 
         <>
@@ -335,11 +365,11 @@ function Battle({ sounds }) {
                     isUserLose ?
                         <div className="hider">
                             <div>
-                                <h1>R.I.P</h1>
+                                <h1 style={{color:"whitesmoke"}} >R.I.P</h1>
                                 <button className="btn" text="BACK" onClick={() => {
                                     sounds.battleSound.off()
                                     sounds.winningSound.off()
-                                }} ><Link to={{ pathname: '/world', state: { userBackFromBattle: false, healPokemons: true } }}>BACK</Link></button>
+                                }} ><Link style={{color:"whitesmoke"}} to={{ pathname: '/world', state: { userBackFromBattle: false, healPokemons: true } }}>BACK</Link></button>
                             </div>
                         </div>
                         :
@@ -385,26 +415,51 @@ function Battle({ sounds }) {
                 {
                     isPokemonChangeWanted &&
                     <div className="hider">
-                        <>
-                            <div className="user-pokemons-container">
-                                {user.pokemons.map((poke) => {
-                                    return (
-                                        <div
-                                            key={poke.name}
-                                            onClick={() => {
-                                                setChosenPokemon(poke)
-                                                setIsPokemonChangeWanted(false)
-                                            }}
-                                            className="user-individual-pokemon">
-                                            <img src={require(`../../img/pokemon-front/gif/${poke.name}.gif`).default} alt={poke.name} />
-                                            <h3>Lv: {poke.level}</h3>
-                                            <h3>HP: {Math.round(poke.hp / poke.maxHp * 100)}%</h3>
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                        </>
+                        <div className="user-pokemons-container">
+                            {user.pokemons.map((poke) => {
+                                return (
+                                    <div
+                                        key={poke.name}
+                                        onClick={() => {
+                                            setChosenPokemon(poke)
+                                            setIsPokemonChangeWanted(false)
+                                        }}
+                                        className="user-individual-pokemon">
+                                        <img src={require(`../../img/pokemon-front/gif/${poke.name}.gif`).default} alt={poke.name} />
+                                        <h3>Lv: {poke.level}</h3>
+                                        <h3>HP: {Math.round(poke.hp / poke.maxHp * 100)}%</h3>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </div>
+                }
+                {
+                    prePokeballThrow && // ask for throwing confiirm
+                    <div className="hider">
+                        <div className="throw-confirm">
+                            <h4>Pokeballs left: {user.pokeballs}</h4>
+                            <img src={require('../../img/home/pokeball.png').default} alt="pokeball" />
+                            <div>
+                                <Button
+                                    onClick={() => {
+                                        (user.pokeballs > 0 && user.pokemons.length < 8) && handlePokeballThrow()
+                                    }}
+                                    text="throw"
+                                />
+                                <Button
+                                    onClick={() => {
+                                        setPrePokeballThrow(false)
+                                    }}
+                                    text="cancel"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                }
+                {
+                    pokeballThrow && //throwing pokeball
+                    <img className="pokeball-throw" src={require('../../img/home/pokeball.png').default} alt="pokeball" />
                 }
                 <div
                     style={{
@@ -413,13 +468,11 @@ function Battle({ sounds }) {
                     className="pokemons-container">
                     {
                         user &&
-                        <Pokemon forwardedRef={enemyPokemonRef} isUserPokemon={false} pokemon={enemyPokemon} />
+                        <Pokemon enemyClassName={pokeballThrow ? "enemy-to-pokeball" : captureFailed ? "enemy-back" : "enemy-pokemon-img"} forwardedRef={enemyPokemonRef} isUserPokemon={false} pokemon={enemyPokemon} />
                     }
                     {
                         battleStarted &&
-                        <>
-                            <Pokemon forwardedRef={userPokemonRef} isUserPokemon={true} pokemon={chosenPokemon} />
-                        </>
+                        <Pokemon forwardedRef={userPokemonRef} isUserPokemon={true} pokemon={chosenPokemon} />
                     }
                 </div>
                 <div
@@ -453,12 +506,11 @@ function Battle({ sounds }) {
                                     )
                                 })}</div>
                                 :
-                                isBattleWanted === false ?
+                                isBattleWanted === false ?    //* user press "run"
                                     handleRun()
                                     :
                                     <div className="message-box">
                                         <div className="first-btn">
-
                                             <button
                                                 style={{ height: "fit-content" }}
                                                 className="btn"
@@ -504,6 +556,7 @@ function Battle({ sounds }) {
                                                     turnIsActive={turnIsActive}
                                                     className="pokemon-switch-btn"
                                                     onClick={() => handleChangePokemon()} text="pokemons" />
+
                                             </>
                                             :
                                             <>
@@ -522,12 +575,16 @@ function Battle({ sounds }) {
                                                         </React.Fragment>
                                                     )
                                                 })}
-
-                                                <Button
-                                                    turnIsActive={turnIsActive}
-                                                    className="pokemon-switch-btn"
-                                                    onClick={() => handleChangePokemon()} text="pokemons" />
-
+                                                <div className="options-btns">
+                                                    <Button
+                                                        turnIsActive={turnIsActive}
+                                                        className="pokemon-switch-btn"
+                                                        onClick={() => handleChangePokemon()} text="pokemons" />
+                                                    <Button
+                                                        turnIsActive={turnIsActive}
+                                                        className="pokemon-switch-btn"
+                                                        onClick={() => handlePrePokeballThrow()} text="pokeballs" />
+                                                </div>
                                             </>
                                     }
                                 </div>
