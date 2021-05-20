@@ -224,7 +224,7 @@ const spearow = {
 }
 const squirtle = {
     quality: 1.45,
-    defense: 15,
+    defense: 14,
     accurate: 13,
     power: 14,
     dodge: 13,

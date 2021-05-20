@@ -56,7 +56,7 @@ class Pokemon {
                     addOrDecreaseByType = attack === "dragon_breath" ? 1.1 : 1
                 }
                 break;
-                
+
             case (attackerType === "water"):
                 if (opponentType === "fire" || opponentType === "grass" || opponentType === "rock") {
                     addOrDecreaseByType = attack === "water_splash" ? 1.1 : 1
@@ -64,7 +64,7 @@ class Pokemon {
                 break;
 
             case (attackerType === "fighting"):
-                addOrDecreaseByType = (attack === "punch" || attack === "kick" || attack === "mega_kick" || attack === "quick_attack") ? 1.0 : 17
+                addOrDecreaseByType = (attack === "punch" || attack === "kick" || attack === "mega_kick" || attack === "quick_attack") ? 1.1 : 1
                 break;
 
             case (attackerType === "rock"):
@@ -113,7 +113,18 @@ class Pokemon {
         if (attack !== "shield") return "invalid defense increase"
     }
 
+    isCapture() {
+        debugger
+
+        const promoter = attributesList[this.name].quality - 1
+        const capturePercent = 0.85 - promoter
+        const randomize = Math.random()
+        const result = randomize <= capturePercent ? true : false
+        return result
+    }
+
     calculateExp(enemy, percentCause) {
+        
         const promoter = attributesList[enemy.name].quality
         let reward =
             Number(
@@ -123,10 +134,9 @@ class Pokemon {
                 percentCause
                 .toFixed(2)
             )
-        console.log('reward:', reward)
-
         return reward
     }
+
 }
 
 
