@@ -22,4 +22,5 @@ Advanced work with classes, render flow, sounds, sprites, animations, RPG game f
 ![battle](./github_demo_pics/battle.jpg)
 **- Battle section. Alot of animations, manage both in-battle functions(calculate hit/miss, damage and defense consider types and pokemon stats) and after-battle (exp gain, health lost, api call..) .**
 
-<h2>Try It! -> https://pokemon-rpg-game.herokuapp.com/</h2> 
+<h2>Try It!
+  https://pokemon-rpg-game.herokuapp.com/</h2> 
