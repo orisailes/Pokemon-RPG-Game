@@ -1,6 +1,8 @@
 **Web game base on classic "Pokemon" the gameboy game. The user got character that can travel the world, battle enemies pokemons, level up, gain money and buy new pokemons. User data stored in database.
 Advanced work with classes, render flow, sounds, sprites, animations, RPG game formulas, data and algorithms.**
 
+**https://pokemon-rpg-game.herokuapp.com/**
+
 <h1>Landing</h1>
 
 ![landing](./github_demo_pics/landing.jpg)
