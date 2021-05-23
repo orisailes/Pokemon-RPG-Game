@@ -12,10 +12,12 @@ Landing form - login/register.
 ![town](./github_demo_pics/town.jpg)
 In the town the user can chat with character and buy pokemons or restore lost hp points
 
-Forest
+<h1>Forest</h1>
+
 ![forest](./github_demo_pics/forest.jpg)
 User character travel the the world using keyboard In the forest, the user got a chance to meet an enemy if step in the bushes
 
-Battle
+<h1>Battle</h1>
+
 ![battle](./github_demo_pics/battle.jpg)
 Battle section. Alot of animations, manage both in-battle functions(calculate hit/miss, damage and defense consider types and pokemon stats) and after-battle (exp gain, health lost, api call..) .
