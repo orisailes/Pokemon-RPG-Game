@@ -6,7 +6,7 @@ Advanced work with classes, render flow, sounds, sprites, animations, RPG game f
 ![landing](./github_demo_pics/landing.jpg)
 Landing form - login/register.
 
-Town
+<h1>Town</h1>
 ![town](./github_demo_pics/town.jpg)
 In the town the user can chat with character and buy pokemons or restore lost hp points
 
