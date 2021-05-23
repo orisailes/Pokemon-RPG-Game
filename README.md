@@ -2,7 +2,7 @@ Web game base on classic "Pokemon" the gameboy game. The user got character that
 Advanced work with classes, render flow, sounds, sprites, animations, RPG game formulas, data and algorithms.
 
 
-Landing
+<h1>Landing</h1>
 ![landing](./github_demo_pics/landing.jpg)
 Landing form - login/register.
 
