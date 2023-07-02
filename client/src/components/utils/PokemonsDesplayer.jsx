@@ -16,7 +16,7 @@ const PokemonsDisplayer = ({ initialPokemonChoose }) => {
                 <div className="heading">
                     <img
                         className="pokemons-desplayer-pokeball"
-                        src={require('../../img/home/pokeball.png').default}
+                        src={require('../../img/home/pokeball.png')}
                         alt="pokeball"
                     >
 
@@ -25,8 +25,8 @@ const PokemonsDisplayer = ({ initialPokemonChoose }) => {
                 </div>
                 {
                     hoveredPokemon &&
-                    <div className="hovered-pokemon">
-                        <img src={require(`../../img/pokemon-front/${hoveredPokemon.name}.png`).default} alt="hovered-pokemon" />
+                    <div style={{color:'white', textAlign:'center'}} className="hovered-pokemon">
+                        <img src={require(`../../img/pokemon-front/${hoveredPokemon.name}.png`)} alt="hovered-pokemon" />
                         <div>
                             <p>ATK:{hoveredPokemon.power}</p>
                             <p>DEF:{hoveredPokemon.defense}</p>
@@ -36,7 +36,7 @@ const PokemonsDisplayer = ({ initialPokemonChoose }) => {
                             <p>DODGE:{hoveredPokemon.dodge}</p>
                         </div>
                         <div className="attacks">
-                            <span>ATTACKS AVAILABLE:<br></br>{hoveredPokemon.attacks[3].map(atc=><span>{atc.replace("_","  ")},</span>)}</span>
+                            <span>ATTACKS AVAILABLE:<br></br>{hoveredPokemon.attacks[3].map(atc=><span>{atc.replace("_","  ")}</span>)}</span>
                        </div>
                     </div>
                 }
@@ -53,7 +53,7 @@ const PokemonsDisplayer = ({ initialPokemonChoose }) => {
                                         className="pokemon-gif"
                                         key={pokemon} >
                                         <img
-                                            src={require(`../../img/pokemon-front/gif/${pokemon}.gif`).default}
+                                            src={require(`../../img/pokemon-front/gif/${pokemon}.gif`)}
                                             alt={pokemon}
                                         >
                                         </img>

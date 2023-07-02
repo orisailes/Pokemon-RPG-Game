@@ -382,7 +382,7 @@ function Battle({ sounds, musicOff, setMusicOff }) {
                                             <div
                                                 key={poke.name}
                                                 className="end-game-individual-pokemon">
-                                                <img src={require(`../../img/pokemon-front/${poke.name}.png`).default} alt={poke.name} />
+                                                <img src={require(`../../img/pokemon-front/${poke.name}.png`)} alt={poke.name} />
                                                 <h3
                                                     className={isLeveledUp ? "new-level-recived" : ""}>
                                                     Lv: {poke.level}
@@ -424,7 +424,7 @@ function Battle({ sounds, musicOff, setMusicOff }) {
                                             setIsPokemonChangeWanted(false)
                                         }}
                                         className="user-individual-pokemon">
-                                        <img src={require(`../../img/pokemon-front/gif/${poke.name}.gif`).default} alt={poke.name} />
+                                        <img src={require(`../../img/pokemon-front/gif/${poke.name}.gif`)} alt={poke.name} />
                                         <h3>Lv: {poke.level}</h3>
                                         <h3>HP: {Math.round(poke.hp / poke.maxHp * 100)}%</h3>
                                     </div>
@@ -438,7 +438,7 @@ function Battle({ sounds, musicOff, setMusicOff }) {
                     <div className="hider">
                         <div className="throw-confirm">
                             <h4>Pokeballs left: {user.pokeballs}</h4>
-                            <img src={require('../../img/home/pokeball.png').default} alt="pokeball" />
+                            <img src={require('../../img/home/pokeball.png')} alt="pokeball" />
                             <div>
                                 <Button
                                     onClick={() => {
@@ -458,7 +458,7 @@ function Battle({ sounds, musicOff, setMusicOff }) {
                 }
                 {
                     pokeballThrow && //throwing pokeball
-                    <img className="pokeball-throw" src={require('../../img/home/pokeball.png').default} alt="pokeball" />
+                    <img className="pokeball-throw" src={require('../../img/home/pokeball.png')} alt="pokeball" />
                 }
                 <div
                     style={{
@@ -491,7 +491,7 @@ function Battle({ sounds, musicOff, setMusicOff }) {
                                                 id={poke.name}
                                             >
                                                 <img
-                                                    src={require(`../../img/pokemon-front/gif/${poke.name}.gif`).default}
+                                                    src={require(`../../img/pokemon-front/gif/${poke.name}.gif`)}
                                                     alt={poke.name}
                                                 >
                                                 </img>

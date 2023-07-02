@@ -18,7 +18,6 @@ const Store = ({ closeStore, storeBuying, user }) => {
 
     const handlePokeballBuy = () => {
         if (user) {
-            console.log(user.money);
             storeBuying("pokeball")
         }
     }
@@ -37,7 +36,7 @@ const Store = ({ closeStore, storeBuying, user }) => {
                                 className="pokemon-gif"
                                 key={pokemon}>
                                 <img
-                                    src={require(`../../img/pokemon-front/gif/${pokemon}.gif`).default}
+                                    src={require(`../../img/pokemon-front/gif/${pokemon}.gif`)}
                                     alt={pokemon}
                                 >
                                 </img>
@@ -67,7 +66,7 @@ const Store = ({ closeStore, storeBuying, user }) => {
             >
                 <img
                     className="pokemons-desplayer-pokeball"
-                    src={require('../../img/home/pokeball.png').default}
+                    src={require('../../img/home/pokeball.png')}
                     alt="pokeball"
                 >
                 </img>

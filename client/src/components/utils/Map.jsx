@@ -131,9 +131,6 @@ const Map = ({ tiles, toggleMap, toggleChat, sounds, isCharacterInHome, forwarde
                     setUserMeetEnemy(true)
                     !musicOff && sounds.forestSound.off()
                     !musicOff && sounds.battleSound.on()
-                    if(musicOff){
-                        sounds.battleSound.runSilente()
-                    }
                     location.push('/battle')
                 }
                 setPlayerArrayPosition(helper) // new position saved

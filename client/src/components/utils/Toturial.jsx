@@ -13,25 +13,25 @@ const PreBuy = ({ setShowToturial,mapRef }) => {
                         <p>
                             Character Movement
                         </p>
-                        <img src={require('../../img/toturial/keyboard_toturial.png').default} alt="keyboard" />
+                        <img src={require('../../img/toturial/keyboard_toturial.png')} alt="keyboard" />
                     </div>
                     <div>
                         <p>
                             Talk
                         </p>
-                        <img src={require('../../img/toturial/space_toturial.png').default} alt="space" />
+                        <img  style={{height:'50px'}} src={require('../../img/toturial/space_toturial.png')} alt="space" />
                     </div>
                     <div className="to-forest">
                         <p>
                             To Forest
                         </p>
-                        <img src={require('../../img/toturial/to_forest.png').default} alt="toForest" />
+                        <img style={{height:'60px', width:'50px'}} src={require('../../img/toturial/to_forest.png')} alt="toForest" />
                     </div>
                     <div>
                         <p>
                             Look for wild Pokemons
                         </p>
-                        <img src={require('../../img/map/enemyGrass.png').default} alt="wildPokemons" />
+                        <img src={require('../../img/map/enemyGrass.png')} alt="wildPokemons" />
                     </div>
                     <Button
                         text="got it"

@@ -1,0 +1,1 @@
+module.exports = {clusterUrl : 'mongodb+srv://ori1sailes:lGCrE8JNRvLsG5PO@cluster0.mxazsvn.mongodb.net/?retryWrites=true&w=majority'}

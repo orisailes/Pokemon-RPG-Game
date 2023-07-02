@@ -10,6 +10,14 @@
 
 .world i{
     position: absolute;
-    top: 5px;
+    top: 12px;
     left: 49%;
+}
+
+.volume-icon {
+    left: calc(49% - 30px) !important;
+}
+
+.question-mark {
+    left: calc(49% - 55px) !important;
 }

@@ -214,7 +214,7 @@ const World = ({ sounds, showToturial, setShowToturial, musicOff, setMusicOff })
                 <button
                     onClick={() => toggleInventory(prev => !prev)}
                     className="inventory-btn">
-                    <img src={require('../../img/utils/backpack.png').default} alt="backpach" ></img>
+                    <img src={require('../../img/utils/backpack.png')} alt="backpack" ></img>
                 </button>
                 <i
                     className={`${musicOff ? "fas fa-volume-mute fa-lg" : "fas fa-volume-up fa-lg"} volume-icon `}
@@ -223,7 +223,7 @@ const World = ({ sounds, showToturial, setShowToturial, musicOff, setMusicOff })
                 </i>
 
                 <i
-                    className="fas fa-question fa-lg .question-mark-i"
+                    className="fas fa-question fa-lg question-mark"
                     onClick={() => setShowToturial(prev => !prev)}
                 >
                 </i>

@@ -8,7 +8,7 @@ const Login = ({ email, setEmail, password, setPassword, onFormSubmit, error }) 
     const [showPass, setShowPass] = useState(false)
     return (
         <div className="login-popup">
-            <img src={require('../../img/home/pokeball.png').default} alt="pokeball" />
+            <img src={require('../../img/home/pokeball.png')} alt="pokeball" />
             { (isLoginWanted !== null) &&
                 <>
                     <form onSubmit={(e) => onFormSubmit(e)}>

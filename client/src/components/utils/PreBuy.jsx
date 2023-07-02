@@ -17,14 +17,14 @@ const PreBuy = ({ product, clickToBuy, cancel, preBuyText, user }) => {
                         product === "pokeball" ?
                             <img
                             className="pokeball-pic"
-                                src={require(`../../img/home/pokeball.png`).default}
+                                src={require(`../../img/home/pokeball.png`)}
                                 alt="pokeball"
                             >
                             </img>
                             :
                             <img
                                 src={require(`../../img/pokemon-front/${product.pokemon}.png`
-                                ).default}
+                                )}
                                 alt={product.pokemon}
                             />
                     }

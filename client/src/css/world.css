@@ -26,7 +26,7 @@ color: black;
     background: black;
     position: absolute;
     top: 20vh;
-    left: -33vw;
+    left: 13vw;
     overflow: hidden;
     color: whitesmoke;
     display: flex;
@@ -43,4 +43,14 @@ color: black;
 .world .inventory-displayer .inventory-pokemon-div .exp-bar{
     width: 100%;
     border-radius: none;
+}
+
+.pre-disconnect {
+    height: 33vh;
+    width: 100vw;
+    z-index: 123123123;
+    position: absolute;
+    left: 33vw;
+    top: 20vh;
+    background: white;
 }

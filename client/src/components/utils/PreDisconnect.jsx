@@ -1,14 +1,13 @@
 import React from 'react'
 import Button from './Button'
 import {useHistory} from 'react-router-dom'
-import '../../css/pre-disconnect.css'
 
 const PreDisconnect = ({setPreDisconnect,mapRef}) => {
 
     const location = useHistory()
     return (
         <div
-            className="pre-disconnect">
+            className="chat-box">
             <div className="pre-disconnect-grid">
                 <div className="question">
                     <p> 
@@ -24,6 +23,7 @@ const PreDisconnect = ({setPreDisconnect,mapRef}) => {
                         setPreDisconnect(false)
                         location.push('/landing')
                     }}
+                    showArrow={false}
                 />
                 <Button
                     text="no"
@@ -31,6 +31,7 @@ const PreDisconnect = ({setPreDisconnect,mapRef}) => {
                         setPreDisconnect(false)
                         mapRef.current.focus()
                     }}
+                    showArrow={false}
                 />
 
             </div>

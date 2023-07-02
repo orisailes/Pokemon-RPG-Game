@@ -23,7 +23,7 @@ const Inventory = ({ user, showInventory, toggleInventory }) => {
                         user.pokemons.map((poke) => {
                             return (
                                 <div className="inventory-pokemon-div">
-                                    <img src={require(`../../img/pokemon-front/gif/${poke.name}.gif`).default} alt={poke.name}>
+                                    <img src={require(`../../img/pokemon-front/gif/${poke.name}.gif`)} alt={poke.name}>
                                     </img>
                                     <h4>
                                         HP:{Math.floor((poke.hp / poke.maxHp) * 100)}%

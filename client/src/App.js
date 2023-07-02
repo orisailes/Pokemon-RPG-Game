@@ -25,6 +25,8 @@ function App() {
   //TODO: handleRun , validat that no more than 8 pokemons, 
   
   const location = useHistory()
+  const [showToturial, setShowToturial] = useState(false);
+  const [musicOff, setMusicOff] = useState(true);
 
   location.listen((newLocation, action) => {
     if (action === "PUSH") {
@@ -58,7 +60,11 @@ function App() {
     landingSound: {
       on: () => {
         landingSound.volume = 0.5
-        landingSound.play()
+        try {
+          landingSound.play()
+        } catch (e) {
+          console.log('e :', e)
+        }
       },
       pause: () => landingSound.pause(),
       off: () => {
@@ -69,7 +75,11 @@ function App() {
     battleSound: {
       on: () => {
         battleSound.volume = 0.5
-        battleSound.play()
+        try {
+          battleSound.play()
+        } catch (e) {
+          console.log('e :', e)
+        }
       },
       pause: () => battleSound.pause(),
       off: () => {
@@ -80,7 +90,11 @@ function App() {
     winningSound: {
       on: () => {
         winningSound.volume = 0.5
-        winningSound.play()
+        try {
+          winningSound.play()
+        } catch (e) {
+          console.log('e :', e)
+        }
       },
       pause: () => winningSound.pause(),
       off: () => {
@@ -91,7 +105,11 @@ function App() {
     healSound: {
       on: () => {
         healSound.volume = 0.8
-        healSound.play()
+        try {
+          healSound.play()
+        } catch (e) {
+          console.log('e :', e)
+        }
       },
       pause: () => healSound.pause(),
       off: () => {
@@ -102,7 +120,11 @@ function App() {
     forestSound: {
       on: () => {
         forestSound.volume = 0.5
-        forestSound.play()
+        try {
+          forestSound.play()
+        } catch (e) {
+          console.log('e :', e)
+        }
       },
       pause: () => forestSound.pause(),
       off: () => {
@@ -113,7 +135,11 @@ function App() {
     homeSound:{
       on:()=> {
         homeSound.volume = 0.5
-        homeSound.play()
+        try {
+          homeSound.play()
+        } catch (e) {
+          console.log('e :', e)
+        }
       },
       pause: ()=> homeSound.pause(),
       off:()=>{
@@ -130,15 +156,15 @@ function App() {
         <Route exact path="/" render={() => <Redirect to="/landing" />} />
 
         <Route exact path="/battle">
-          <Battle sounds={sounds} />
+          <Battle sounds={sounds} setMusicOff={setMusicOff} />
         </Route>
 
         <Route exact path="/landing">
-          <Landing sounds={sounds} />
+          <Landing sounds={sounds} musicOff={musicOff} setMusicOff={setMusicOff}/>
         </Route>
 
         <Route exact path="/world">
-          <World sounds={sounds} />
+          <World sounds={sounds} showToturial={showToturial} setShowToturial={setShowToturial} musicOff={musicOff} setMusicOff={setMusicOff} />
         </Route>
 
       </userContext.Provider>

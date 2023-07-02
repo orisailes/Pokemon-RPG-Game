@@ -25,7 +25,7 @@ const Home = ({ sounds,musicOff,setMusicOff  }) => {
 
     useEffect(() => {
 
-        setUser(null) // bug protector
+        setUser(null)
 
     }, [])
 
@@ -80,6 +80,7 @@ const Home = ({ sounds,musicOff,setMusicOff  }) => {
         if (!isMusicPlaying) {
             sounds.landingSound.on()
             setIsMusicPlaying(true)
+            setMusicOff(false)
         }
     }
 
