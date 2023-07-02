@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 var url
 if (process.env.NODE_ENV === 'production') {
-    url = process.env.urlKey
+    url = process.env.clusterUrl
 } else {
     url = require('../keys').clusterUrl
 }
