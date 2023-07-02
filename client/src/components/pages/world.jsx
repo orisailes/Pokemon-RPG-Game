@@ -103,7 +103,7 @@ const World = ({ sounds, showToturial, setShowToturial, musicOff, setMusicOff })
             for (let i = 0; i < helper.pokemons.length; i++) {
                 helper.pokemons[i].hp = helper.pokemons[i].maxHp
             }
-            await axios.put(`/api/users/${user.email}`, helper)
+            await axios.put(`https://pokemon-rpg-game-server.onrender.com/api/users/${user.email}`, helper)
             setUser(helper)
         }
         await wait(4500)
@@ -147,7 +147,7 @@ const World = ({ sounds, showToturial, setShowToturial, musicOff, setMusicOff })
                     let helper = _.cloneDeep(user)
                     helper.money -= pokemon.price
                     helper.pokemons.push(newPokemon)
-                    await axios.put(`/api/users/${user.email}`, helper)
+                    await axios.put(`https://pokemon-rpg-game-server.onrender.com/api/users/${user.email}`, helper)
                     setUser(helper)
                     setPreBuyText('Pokemon buy succesfully')
                 }
@@ -158,7 +158,7 @@ const World = ({ sounds, showToturial, setShowToturial, musicOff, setMusicOff })
                     let helper = _.cloneDeep(user)
                     helper.money -= 400
                     helper.pokeballs += 1
-                    await axios.put(`/api/users/${user.email}`, helper)
+                    await axios.put(`https://pokemon-rpg-game-server.onrender.com/api/users/${user.email}`, helper)
                     setUser(helper)
                     setPreBuyText('Pokemon buy succesfully')
                 }

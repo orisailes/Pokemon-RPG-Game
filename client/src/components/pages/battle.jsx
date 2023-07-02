@@ -109,7 +109,7 @@ function Battle({ sounds, musicOff, setMusicOff }) {
                 newUser.money += newMoney
                 setEndGameNewLevels(levelUpCounters)
                 setUser(newUser)
-                await axios.put(`/api/users/${newUser.email}`, { // axios update new user
+                await axios.put(`https://pokemon-rpg-game-server.onrender.com/api/users/${newUser.email}`, { // axios update new user
                     money: newUser.money,
                     pokemons: newUser.pokemons,
                 })
@@ -343,7 +343,7 @@ function Battle({ sounds, musicOff, setMusicOff }) {
             setCaptureFailed(true)
         }
         setUser(newUser)
-        await axios.put(`/api/users/${newUser.email}`, newUser)
+        await axios.put(`https://pokemon-rpg-game-server.onrender.com/api/users/${newUser.email}`, newUser)
         await wait(1500)
     }
 

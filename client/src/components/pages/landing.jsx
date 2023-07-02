@@ -43,7 +43,7 @@ const Home = ({ sounds,musicOff,setMusicOff  }) => {
             setError('')
             try {
 
-                const newUser = await axios.post('/api/users/register', {
+                const newUser = await axios.post('https://pokemon-rpg-game-server.onrender.com/api/users/register', {
                     email, password
                 })
                 newUser.status === 200 && setNewUserCreated(true)
@@ -57,7 +57,7 @@ const Home = ({ sounds,musicOff,setMusicOff  }) => {
         if (action === "login") {
             setError('')
             try {
-                const newUser = await axios.post('/api/users/login', {
+                const newUser = await axios.post('https://pokemon-rpg-game-server.onrender.com/api/users/login', {
                     email, password
                 })
                 let helper = new Pokemon('helper')
@@ -90,7 +90,7 @@ const Home = ({ sounds,musicOff,setMusicOff  }) => {
         let helper = { ...user }
         helper.pokemons.push(newPokemon)
         setUser(helper)
-        await axios.put(`/api/users/${user.email}`, helper)
+        await axios.put(`https://pokemon-rpg-game-server.onrender.com/api/users/${user.email}`, helper)
         sounds.landingSound.off()
         location.push('/world')
     }
