@@ -1,7 +1,7 @@
 **Web game base on classic "Pokemon" the gameboy game. The user got character that can travel the world, battle enemies pokemons, level up, gain money and buy new pokemons. User data stored in database.
 Advanced work with classes, render flow, sounds, sprites, animations, RPG game formulas, data and algorithms.**
 
-**https://pokemon-rpg-game.herokuapp.com/**
+**https://pokemon-rpg-game-client.onrender.com/**
 
 <h1>Landing</h1>
 
@@ -25,4 +25,4 @@ Advanced work with classes, render flow, sounds, sprites, animations, RPG game f
 **- Battle section. Alot of animations, manage both in-battle functions(calculate hit/miss, damage and defense consider types and pokemon stats) and after-battle (exp gain, health lost, api call..) .**
 
 <h2>Try It!
-  https://pokemon-rpg-game.herokuapp.com/</h2> 
+https://pokemon-rpg-game-client.onrender.com/</h2> 

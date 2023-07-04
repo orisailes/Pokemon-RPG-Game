@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Button from './Button'
 
 
-const Login = ({ email, setEmail, password, setPassword, onFormSubmit, error }) => {
+const Login = ({ email, setEmail, password, setPassword, onFormSubmit, error, isLoading }) => {
 
     const [isLoginWanted, setIsLoginWanted] = useState(null)
     const [showPass, setShowPass] = useState(false)
@@ -25,7 +25,12 @@ const Login = ({ email, setEmail, password, setPassword, onFormSubmit, error }) 
                         </div>
                         {
                             isLoginWanted ?
-                                <input id="login" type="submit" value="Login" />
+                                <>
+                                    <input disabled={isLoading} id="login" type="submit" value="Login"/>
+                                    {isLoading && <p style={{color:'black'}}>
+                                        Loading
+                                    </p>}
+                                </>
                                 :
                                 <input id="register" type="submit" value="Register" />
                         }

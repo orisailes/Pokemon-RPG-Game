@@ -21,6 +21,7 @@ const Home = ({ sounds,musicOff,setMusicOff  }) => {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const [newUserCreated, setNewUserCreated] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const location = useHistory()
 
     useEffect(() => {
@@ -57,6 +58,7 @@ const Home = ({ sounds,musicOff,setMusicOff  }) => {
         if (action === "login") {
             setError('')
             try {
+                setIsLoading(true)
                 const newUser = await axios.post('https://pokemon-rpg-game-server.onrender.com/api/users/login', {
                     email, password
                 })
@@ -65,6 +67,7 @@ const Home = ({ sounds,musicOff,setMusicOff  }) => {
                     Object.setPrototypeOf(newUser.data.pokemons[i], helper) // set proto for new user
                 }
                 setUser(newUser.data)
+                setIsLoading(false)
                 setIsUserLoggedIn(true)
             } catch (err) {
                 console.log(err.message)
@@ -124,6 +127,7 @@ const Home = ({ sounds,musicOff,setMusicOff  }) => {
                                         setPassword={setPassword}
                                         onFormSubmit={onFormSubmit}
                                         error={error}
+                                        isLoading={isLoading}
                                     />
                                     <i
                                         style={
